@@ -111,7 +111,74 @@ class MyHomePage extends StatelessWidget {
                   )
                 ],)
               ),
+            ),
+            Container(
+              height: 180,
+              width: MediaQuery.of(context).size.width,
+              child: Stack(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(top: 35),
+                    height: 120,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      image: const DecorationImage(image: AssetImage('assets/card.jpg'),
+                      fit: BoxFit.fill
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          blurRadius: 40,
+                          offset: const Offset(8, 10),
+                          color: AppColor.gradientSecond.withOpacity(0.3)
+                        ),
+                         BoxShadow(
+                          blurRadius: 10,
+                          offset: const Offset(-1, -5),
+                          color: AppColor.gradientSecond.withOpacity(0.3)
+                        )
+                      ]
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 200, bottom: 30),
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: const BoxDecoration(
+                    image: DecorationImage(image: AssetImage('assets/figure.png'),
+                      ),  
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 50, left: 150),
+                    width: double.maxFinite,
+                    height: 100,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children:  [
+                        Text('You are doing great',
+                        style: TextStyle(fontSize: 18, color: AppColor.homePageDetail, fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 10,),
+                        Text('Keep it up',
+                        style: TextStyle(fontSize: 16, color: AppColor.homePagePlanColor)
+                        ),
+                        Text('Stick to your plan.',
+                        style: TextStyle(fontSize: 16, color: AppColor.homePagePlanColor)
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+           Row(
+             children: [
+                Text("Area of focus", 
+            style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500, color: AppColor.homePageTitle),
             )
+             ],
+           )
           ],
         ),
       ),

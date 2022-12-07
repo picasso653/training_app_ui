@@ -1,12 +1,28 @@
-import 'dart:ui';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'colors.dart';
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  List info = [];
+  _initData() {
+    DefaultAssetBundle.of(context).loadString('json/info.json').then((value) {
+      info = json.decode(value);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,6 +187,7 @@ class MyHomePage extends StatelessWidget {
                     ],
                   )),
             ),
+            // ignore: sized_box_for_whitespace
             Container(
               height: 180,
               width: MediaQuery.of(context).size.width,
@@ -248,43 +265,87 @@ class MyHomePage extends StatelessWidget {
                 )
               ],
             ),
-            Expanded(child: ListView.builder(
-              itemCount: 4,
-              itemBuilder: ((context, index) {
-              return Row(
-                children: [
-                  Container(
-                    padding: const EdgeInsets.only(bottom: 5),
-                    height: 170,
-                    width: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: Colors.white,
-                      image: const DecorationImage(image: AssetImage('assets/ex1.png')),
-                      boxShadow: [BoxShadow(
-                        blurRadius: 3,
-                        offset: const Offset(5, 5),
-                        color: AppColor.gradientSecond.withOpacity(0.1)
-                      ),
-                      BoxShadow(
-                        blurRadius: 3,
-                        offset: const Offset(-5, -5),
-                        color: AppColor.gradientSecond.withOpacity(0.1)
-                      )
-                      ]
-                    ),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Text('Glutes', style: 
-                      TextStyle(
-                        color: AppColor.homePageDetail, fontSize: 18
-                      )
-                      ,),
-                    ),
+            Expanded(
+                child: OverflowBox(
+                  maxWidth: MediaQuery.of(context).size.width,
+                  child: ListView.builder(
+                    itemCount: info.length.toDouble() ~/ 2,
+                    itemBuilder: ((_, i) {
+                      int a = 2 * i;
+                      int b = (2 * i) + 1;
+                      return Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 20, bottom: 15),
+                            padding: const EdgeInsets.only(bottom: 5),
+                            height: 170,
+                            width: (MediaQuery.of(context).size.width-90)/2,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                  image: AssetImage(info[a]['img']),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(5, 5),
+                                      color: AppColor.gradientSecond
+                                          .withOpacity(0.1)),
+                                  BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(-5, -5),
+                                      color: AppColor.gradientSecond
+                                          .withOpacity(0.1))
+                                ]),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                info[a]['title'],
+                                style: TextStyle(
+                                    color: AppColor.homePageDetail,
+                                    fontSize: 18),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 20, bottom: 15),
+                            padding: const EdgeInsets.only(bottom: 5),
+                            height: 170,
+                            width: (MediaQuery.of(context).size.width-90)/2,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                image: DecorationImage(
+                                  image: AssetImage(info[b]['img']),
+                                ),
+                                boxShadow: [
+                                  BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(5, 5),
+                                      color: AppColor.gradientSecond
+                                          .withOpacity(0.1)),
+                                  BoxShadow(
+                                      blurRadius: 3,
+                                      offset: const Offset(-5, -5),
+                                      color: AppColor.gradientSecond
+                                          .withOpacity(0.1))
+                                ]),
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Text(
+                                info[b]['title'],
+                                style: TextStyle(
+                                    color: AppColor.homePageDetail,
+                                    fontSize: 18),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    })),
+                  ),
                   )
-                ],
-              );
-            })))
           ],
         ),
       ),

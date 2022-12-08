@@ -268,7 +268,9 @@ class _HomepageState extends State<Homepage> {
             Expanded(
                 child: OverflowBox(
                   maxWidth: MediaQuery.of(context).size.width,
-                  child: ListView.builder(
+                  child: MediaQuery.removePadding(context: context,
+                  removeTop: true,
+                   child: ListView.builder(
                     itemCount: info.length.toDouble() ~/ 2,
                     itemBuilder: ((_, i) {
                       int a = 2 * i;
@@ -276,7 +278,7 @@ class _HomepageState extends State<Homepage> {
                       return Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(left: 20, bottom: 15),
+                            margin: const EdgeInsets.only(left: 20, bottom: 15, top: 15),
                             padding: const EdgeInsets.only(bottom: 5),
                             height: 170,
                             width: (MediaQuery.of(context).size.width-90)/2,
@@ -309,7 +311,7 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(left: 20, bottom: 15),
+                            margin: const EdgeInsets.only(left: 20, bottom: 15, top: 15),
                             padding: const EdgeInsets.only(bottom: 5),
                             height: 170,
                             width: (MediaQuery.of(context).size.width-90)/2,
@@ -343,9 +345,11 @@ class _HomepageState extends State<Homepage> {
                           )
                         ],
                       );
-                    })),
+                    }),
+                    ),
                   ),
-                  )
+                ),
+              )
           ],
         ),
       ),

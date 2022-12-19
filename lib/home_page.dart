@@ -1,6 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:training_app_ui/video_info.dart';
 import 'colors.dart';
 
 class Homepage extends StatefulWidget {
@@ -83,10 +86,15 @@ class _HomepageState extends State<Homepage> {
                 const SizedBox(
                   width: 5,
                 ),
-                Icon(
-                  Icons.arrow_forward,
-                  size: 20,
-                  color: AppColor.homePageIcons,
+                InkWell(
+                  onTap: () {
+                    Get.to(() => const VideoInfo());
+                  },
+                  child: Icon(
+                    Icons.arrow_forward,
+                    size: 20,
+                    color: AppColor.homePageIcons,
+                  ),
                 )
               ],
             ),
@@ -266,11 +274,12 @@ class _HomepageState extends State<Homepage> {
               ],
             ),
             Expanded(
-                child: OverflowBox(
-                  maxWidth: MediaQuery.of(context).size.width,
-                  child: MediaQuery.removePadding(context: context,
+              child: OverflowBox(
+                maxWidth: MediaQuery.of(context).size.width,
+                child: MediaQuery.removePadding(
+                  context: context,
                   removeTop: true,
-                   child: ListView.builder(
+                  child: ListView.builder(
                     itemCount: info.length.toDouble() ~/ 2,
                     itemBuilder: ((_, i) {
                       int a = 2 * i;
@@ -278,10 +287,11 @@ class _HomepageState extends State<Homepage> {
                       return Row(
                         children: [
                           Container(
-                            margin: const EdgeInsets.only(left: 20, bottom: 15, top: 15),
+                            margin: const EdgeInsets.only(
+                                left: 20, bottom: 15, top: 15),
                             padding: const EdgeInsets.only(bottom: 5),
                             height: 170,
-                            width: (MediaQuery.of(context).size.width-90)/2,
+                            width: (MediaQuery.of(context).size.width - 90) / 2,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 color: Colors.white,
@@ -311,10 +321,11 @@ class _HomepageState extends State<Homepage> {
                             ),
                           ),
                           Container(
-                            margin: const EdgeInsets.only(left: 20, bottom: 15, top: 15),
+                            margin: const EdgeInsets.only(
+                                left: 20, bottom: 15, top: 15),
                             padding: const EdgeInsets.only(bottom: 5),
                             height: 170,
-                            width: (MediaQuery.of(context).size.width-90)/2,
+                            width: (MediaQuery.of(context).size.width - 90) / 2,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 color: Colors.white,
@@ -346,10 +357,10 @@ class _HomepageState extends State<Homepage> {
                         ],
                       );
                     }),
-                    ),
                   ),
                 ),
-              )
+              ),
+            )
           ],
         ),
       ),
